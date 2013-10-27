@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Tadcka attribute package.
+ * This file is part of the Tadcka object rating package.
  *
  * (c) Tadas Gliaubicas <tadcka89@gmail.com>
  *
