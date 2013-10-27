@@ -1,2 +1,4 @@
 ObjectRatingBundle
 ==================
+
+not stable
