@@ -1,5 +1,5 @@
 {
-    "name":         "tadcka/object-bundle",
+    "name":         "tadcka/object-rating-bundle",
     "homepage":     "https://github.com/tadcka/ObjectRatingBundle",
     "description":  "Object rating on Symfony2",
     "keywords":     ["object rating", "rating"],
