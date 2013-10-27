@@ -1,0 +1,10 @@
+{% block tadcka_object_rating_widget %}
+    {% spaceless %}
+        <div {{ block("widget_container_attributes") }} class="{{ configs['object_rating_class'] }}">
+            {% for child in form %}
+                {{ form_widget(child, { 'attr': { 'class': 'object_star' } }) }}
+                {{ form_errors(child) }}
+            {% endfor %}
+        </div>
+    {% endspaceless %}
+{% endblock tadcka_object_rating_widget %}

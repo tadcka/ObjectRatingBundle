@@ -1,0 +1,21 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="tadcka_object_rating.twig.object_rating_extension.class">Tadcka\ObjectRatingBundle\Twig\ObjectRatingExtension</parameter>
+        <parameter key="tadcka_object_rating.class">Tadcka\ObjectRatingBundle\Service\ObjectRatingService</parameter>
+    </parameters>
+
+    <services>
+        <service id="tadcka_object_rating.twig.object_rating_extension" class="%tadcka_object_rating.twig.object_rating_extension.class%">
+            <tag name="twig.extension" />
+        </service>
+
+        <service id="tadcka_object_rating" class="%tadcka_object_rating.class%">
+            <argument type="service" id="doctrine"/>
+        </service>
+    </services>
+</container>
