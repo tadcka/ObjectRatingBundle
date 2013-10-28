@@ -1,4 +1,4 @@
-{% block tadcka_object_rating_widget %}
+{% block tadcka_star_rating_widget %}
     {% spaceless %}
         <div {{ block("widget_container_attributes") }} class="{{ configs['object_rating_class'] }}">
             {% for child in form %}
@@ -7,4 +7,4 @@
             {% endfor %}
         </div>
     {% endspaceless %}
-{% endblock tadcka_object_rating_widget %}
+{% endblock tadcka_star_rating_widget %}

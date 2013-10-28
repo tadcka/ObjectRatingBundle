@@ -29,7 +29,7 @@ class ObjectRatingController extends ContainerAware
     private function getUser()
     {
         if (!$this->container->has('security.context')) {
-            throw new \LogicException('The SecurityBundle is not registered in your application.');
+            return null;
         }
 
         if (null === $token = $this->container->get('security.context')->getToken()) {
@@ -46,19 +46,11 @@ class ObjectRatingController extends ContainerAware
     public function indexAction($objectType, $objectId)
     {
         $objectRating = new ObjectRating();
-
-        $fb = $this->container->get('form.factory')->createBuilder('form', $objectRating, array());
-        $fb->add('rating', new ObjectRatingFormType(), array(
-            'label_attr' => array(
-                'class' => 'label_form'
-            ),
-        ));
-
-        $form = $fb->getForm();
+        $form = $this->container->get('form.factory')->create(new ObjectRatingFormType(), $objectRating, array());
         $request = $this->container->get('request');
 
         if ($request->isMethod('POST')) {
-            $form->submit($request);
+            $form->bind($request);
             if ($form->isValid()) {
                 $objectRating->setUserId($this->getUser() !== null ? $this->getUser()->getId() : null);
                 $objectRating->setObjectType($objectType);

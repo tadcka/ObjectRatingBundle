@@ -12,41 +12,17 @@
 namespace Tadcka\ObjectRatingBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-use Symfony\Component\Form\FormInterface;
-use Symfony\Component\Form\FormView;
-use Symfony\Component\OptionsResolver\Options;
+use Symfony\Component\Form\FormBuilderInterface;
 
 class ObjectRatingFormType extends AbstractType
 {
-    public function buildView(FormView $view, FormInterface $form, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $view->vars['configs'] = $options['configs'];
-    }
-
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
-    {
-        $resolver->setDefaults(array(
-            'number' => 5,
-            "label" => "rating",
-            'configs' => array(
-                "object_rating_class" => "object_rating",
+        $builder->add('rating', new StarRatingFormType(), array(
+            'label_attr' => array(
+                'class' => 'label_form'
             ),
-            'expanded' => true,
-            'choices' => function (Options $options) {
-                $choices = array();
-                for ($i = 1; $i <= $options['number']; $i++) {
-                    $choices[$i] = null;
-                }
-                return $choices;
-            },
-            "translation_domain" => "TadckaObjectRatingBundle",
         ));
-    }
-
-    public function getParent()
-    {
-        return 'choice';
     }
 
     public function getName()

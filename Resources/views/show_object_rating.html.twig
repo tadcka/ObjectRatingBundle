@@ -1,0 +1,19 @@
+<div class="object_rating_show" data-rating="{{ objectRatingInfo.getObjectRating() }}" data-count="{{ objectRatingInfo.getObjectRatesCount() }}">
+    <a href="{{ url }}#object_rating">
+        <ul class="object-rating-show-star">
+            {% if objectRatingInfo.isEmpty() %}
+                <li class="fill"><span class="on"></span></li>
+                <li><span>&nbsp;&nbsp;{{ "first_rating" | trans({}, "TadckaObjectRatingBundle") }}</span></li>
+            {% else %}
+                {% for i in range(1, 5) %}
+                    {%if objectRatingInfo.getObjectRating() > i %}
+                        <li class="fill"><span class="on"></span></li>
+                    {% else %}
+                        <li class="fill"><span></span></li>
+                    {% endif %}
+                {% endfor %}
+                <li><span>&nbsp;({{ objectRatingInfo.getObjectRatesCount() }})</span></li>
+            {% endif %}
+        </ul>
+    </a>
+</div>

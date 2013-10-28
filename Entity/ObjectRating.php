@@ -14,7 +14,7 @@ namespace Tadcka\ObjectRatingBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Tadcka\ObjectRatingBundle\Entity\Repository\ObjectRatingRepository")
  * @ORM\Table(name="object_ratings")
  */
 class ObjectRating
