@@ -15,7 +15,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass="Tadcka\ObjectRatingBundle\Entity\Repository\ObjectRatingRepository")
- * @ORM\Table(name="object_ratings")
+ * @ORM\Table(name="tadcka_object_ratings")
  */
 class ObjectRating
 {
