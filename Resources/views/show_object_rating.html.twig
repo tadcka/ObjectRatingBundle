@@ -6,7 +6,7 @@
                 <li><span>&nbsp;&nbsp;{{ "first_rating" | trans({}, "TadckaObjectRatingBundle") }}</span></li>
             {% else %}
                 {% for i in range(1, 5) %}
-                    {%if objectRatingInfo.getObjectRating() > i %}
+                    {%if objectRatingInfo.getObjectRating() >= i %}
                         <li class="fill"><span class="on"></span></li>
                     {% else %}
                         <li class="fill"><span></span></li>
