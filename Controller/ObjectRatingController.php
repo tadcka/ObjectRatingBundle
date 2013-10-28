@@ -20,13 +20,11 @@ use Tadcka\ObjectRatingBundle\Form\Type\ObjectRatingFormType;
 class ObjectRatingController extends ContainerAware
 {
     /**
-     * Get a user from the Security Context.
+     * Get a user id from the Security Context.
      *
-     * @return mixed
-     *
-     * @throws \LogicException If SecurityBundle is not available
+     * @return null|int
      */
-    private function getUser()
+    private function getUserId()
     {
         if (!$this->container->has('security.context')) {
             return null;
@@ -40,7 +38,7 @@ class ObjectRatingController extends ContainerAware
             return null;
         }
 
-        return $user;
+        return $user->getId();
     }
 
     public function indexAction($objectType, $objectId)
@@ -52,7 +50,7 @@ class ObjectRatingController extends ContainerAware
         if ($request->isMethod('POST')) {
             $form->bind($request);
             if ($form->isValid()) {
-                $objectRating->setUserId($this->getUser() !== null ? $this->getUser()->getId() : null);
+                $objectRating->setUserId($this->getUserId());
                 $objectRating->setObjectType($objectType);
                 $objectRating->setObjectId($objectId);
                 $objectRating->setUserIp($request->getClientIp());
