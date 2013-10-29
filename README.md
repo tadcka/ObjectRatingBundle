@@ -74,7 +74,7 @@ Build object raiting info and include to template:
         
         return $this->render('TadckaExampleBundle:Example:example.html.twig', array(
             'object_rating_info' => $this->getObjectRatingManager()
-                ->getObjectRatingInfo(Example::OBJECT_TYPE, $example->getId()),
+                    ->getObjectRatingInfo(Example::OBJECT_TYPE, $example->getId()),
         ));
     }
 ```
@@ -85,12 +85,43 @@ or list:
     public function examplesAction()
     {
         $ids = array(1, 2);
-    
-        $objectsRatingInfo = $this->getObjectRatingManager()->getObjectsRatingInfo(Example::OBJECT_TYPE, $ids);
         
         return $this->render('TadckaExampleBundle:Example:examples.html.twig', array(
-            'objects_rating_info' => $objectsRatingInfo,
+            'objects_rating_info' => $this->getObjectRatingManager()
+                    ->getObjectsRatingInfo(Example::OBJECT_TYPE, $ids);,
         ));
     }
 ```
+
+### Step 5: Render twig template
+
+```twig
+    {% include 'TadckaObjectRatingBundle::show_object_rating.html.twig'
+        with {
+            url: url("exmaple"),
+            objectRatingInfo: object_rating_info
+        }
+    %}
+```
+
+or list:
+
+```twig
+    {% if objects_rating_info[example.getId()] is defined %}
+        {% include 'TadckaObjectRatingBundle::show_object_rating.html.twig'
+            with {
+                url: url("exmaple"),
+                objectRatingInfo: objects_rating_info[example.getId()]
+            }
+        %}
+    {% endif %}
+```
+
+### Step 5: Object rating form
+
+```twig
+    {% render  url('tadcka_object_rating', {objectType: 'example', objectId: example.getId() }) %}
+```
+
+
 
