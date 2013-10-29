@@ -123,5 +123,49 @@ or list:
 {% render  url('tadcka_object_rating', {objectType: 'example', objectId: example.getId() }) %}
 ```
 
+### Step 8: Add object rating event listener
+
+``` php
+<?php
+
+namespace Tadcka\ExampleBundle\EventListener;
+
+use Tadcka\ObjectRatingBundle\Event\ObjectRatingEvent;
+use Tadcka\ObjectRatingBundle\Services\ObjectRatingService;
+
+class ObjectRatingListener
+{
+    /**
+     * @var ObjectRatingService
+     */
+    private $objectRatingService;
+
+    public function setObjectRatingService(ObjectRatingService $objectRatingService)
+    {
+        $this->objectRatingService = $objectRatingService;
+    }
+
+
+    public function onExampleRating(ObjectRatingEvent $event)
+    {
+        $objectRating = $event->getObjectRating();
+        
+        $this->objectRatingService->subscribe($objectRating);
+    }
+}
+```
+Event name is prefix "tadcka_object_rating.event." and object type "example"
+
+``` xml
+<parameter key="tadcka_example.rating_event_listener.class">Tadcka\ExampleBundle\EventListener\ObjectRatingListener</parameter>
+
+<service id="tadcka_example.rating_event_listener" class="%tadcka_example.rating_event_listener.class%">
+    <call method="setObjectRatingService">
+        <argument type="service" id="tadcka_object_rating" />
+    </call>
+    <tag name="kernel.event_listener" event="tadcka_object_rating.event.example" method="onExampleRating"/>
+</service>
+```
+
 
 
