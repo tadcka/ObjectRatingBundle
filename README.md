@@ -59,7 +59,7 @@ Build object raiting info and include to template:
 
 
 ``` php
- /**
+    /**
      * @return \Tadcka\ObjectRatingBundle\Manager\ObjectRatingManager
      */
     private function getObjectRatingManager()
