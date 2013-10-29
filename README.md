@@ -157,7 +157,8 @@ class ObjectRatingListener
 Event name is prefix "tadcka_object_rating.event." and object type "example"
 
 ``` xml
-<parameter key="tadcka_example.rating_event_listener.class">Tadcka\ExampleBundle\EventListener\ObjectRatingListener</parameter>
+<parameter key="tadcka_example.rating_event_listener.class"
+    >Tadcka\ExampleBundle\EventListener\ObjectRatingListener</parameter>
 
 <service id="tadcka_example.rating_event_listener" class="%tadcka_example.rating_event_listener.class%">
     <call method="setObjectRatingService">
