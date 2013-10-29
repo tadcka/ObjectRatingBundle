@@ -93,7 +93,7 @@ or list:
     }
 ```
 
-### Step 5: Render twig template
+### Step 6: Render twig template
 
 ```twig
     {% include 'TadckaObjectRatingBundle::show_object_rating.html.twig'
@@ -117,7 +117,7 @@ or list:
     {% endif %}
 ```
 
-### Step 5: Object rating form
+### Step 7: Object rating form
 
 ```twig
     {% render  url('tadcka_object_rating', {objectType: 'example', objectId: example.getId() }) %}
