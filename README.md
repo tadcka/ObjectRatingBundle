@@ -44,7 +44,16 @@ public function registerBundles()
 $ php app/console doctrine:schema:update --dump-sql
 ```
 
-### Step 4: Create form
+### Step 4: Include javascript and css
+
+```twig
+    @TadckaObjectRatingBundle/Resources/public/css/jquery.rating.css
+
+    @TadckaObjectRatingBundle/Resources/public/js/star-rating/jquery.rating.js
+    @TadckaObjectRatingBundle/Resources/public/js/object-rating.js
+```
+
+### Step 5: Create object rating info
 
 Build object raiting info and include to template:
 
@@ -68,9 +77,11 @@ Build object raiting info and include to template:
                 ->getObjectRatingInfo(Example::OBJECT_TYPE, $example->getId()),
         ));
     }
-    
-    or list:
-    
+```
+
+or list:
+
+``` php
     public function examplesAction()
     {
         $ids = array(1, 2);
