@@ -12,6 +12,7 @@
 namespace Tadcka\ObjectRatingBundle\Controller;
 
 use Symfony\Component\DependencyInjection\ContainerAware;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Tadcka\ObjectRatingBundle\Entity\ObjectRating;
 use Tadcka\ObjectRatingBundle\Event\ObjectRatingEvent;
@@ -41,11 +42,10 @@ class ObjectRatingController extends ContainerAware
         return $user->getId();
     }
 
-    public function indexAction($objectType, $objectId)
+    public function indexAction(Request $request, $objectType, $objectId)
     {
         $objectRating = new ObjectRating();
         $form = $this->container->get('form.factory')->create(new ObjectRatingFormType(), $objectRating, array());
-        $request = $this->container->get('request');
 
         if ($request->isMethod('POST')) {
             $form->bind($request);
