@@ -1,6 +1,8 @@
 ObjectRatingBundle
 ==================
 
+[![SensioLabsInsight](https://insight.sensiolabs.com/projects/b1fdc706-2dd6-4cb0-a459-9c02a7888e03/big.png)](https://insight.sensiolabs.com/projects/b1fdc706-2dd6-4cb0-a459-9c02a7888e03)
+
 ## Installation
 
 ### Step 1: Download TadckaAddressBundle using composer
