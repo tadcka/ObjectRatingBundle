@@ -77,9 +77,12 @@ class ObjectRating
      */
     private $createAt;
 
-    public function __construct()
+    public function __construct($objectType = null, $objectId = null, $userId = null)
     {
         $this->createAt = new \DateTime();
+        $this->objectType = $objectType;
+        $this->objectId = $objectId;
+        $this->userId = $userId;
     }
 
     /**

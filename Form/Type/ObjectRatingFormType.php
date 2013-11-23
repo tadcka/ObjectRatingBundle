@@ -13,6 +13,7 @@ namespace Tadcka\ObjectRatingBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class ObjectRatingFormType extends AbstractType
 {
@@ -22,6 +23,13 @@ class ObjectRatingFormType extends AbstractType
             'label_attr' => array(
                 'class' => 'label_form'
             ),
+        ));
+    }
+
+    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    {
+        $resolver->setDefaults(array(
+            'data_class' => 'Tadcka\ObjectRatingBundle\Entity\ObjectRating',
         ));
     }
 

@@ -15,8 +15,8 @@ use Symfony\Component\DependencyInjection\ContainerAware;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Tadcka\ObjectRatingBundle\Entity\ObjectRating;
-use Tadcka\ObjectRatingBundle\Event\ObjectRatingEvent;
 use Tadcka\ObjectRatingBundle\Form\Type\ObjectRatingFormType;
+use Tadcka\ObjectRatingBundle\Form\Handler\ObjectRatingFormHandler;
 
 class ObjectRatingController extends ContainerAware
 {
@@ -44,23 +44,11 @@ class ObjectRatingController extends ContainerAware
 
     public function indexAction(Request $request, $objectType, $objectId)
     {
-        $objectRating = new ObjectRating();
+        $formHandler = new ObjectRatingFormHandler($request, $this->container->get('event_dispatcher'));
+        $objectRating = new ObjectRating($objectType, $objectId, $this->getUserId());
         $form = $this->container->get('form.factory')->create(new ObjectRatingFormType(), $objectRating, array());
-
-        if ($request->isMethod('POST')) {
-            $form->bind($request);
-            if ($form->isValid()) {
-                $objectRating->setUserId($this->getUserId());
-                $objectRating->setObjectType($objectType);
-                $objectRating->setObjectId($objectId);
-                $objectRating->setUserIp($request->getClientIp());
-
-                $dispatcher = $this->container->get('event_dispatcher');
-                $event = new ObjectRatingEvent($objectRating);
-                $dispatcher->dispatch('tadcka_object_rating.event.' . $objectType, $event);
-
-                return new Response();
-            }
+        if (true === $formHandler->process($form)) {
+            return new Response();
         }
 
         return $this->container->get('templating')->renderResponse(
